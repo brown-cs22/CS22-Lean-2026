@@ -81,7 +81,11 @@ Use the work you did on paper/LaTeX to solve this!
 -/
 
 theorem problem_2 : (A ∩ Bᶜ) ∪ B = A ∪ B := by
-
+  rewrite inter_union_distrib_right
+  rewrite union_comm Bᶜ B
+  rewrite union_compl_self
+  rewrite inter_univ
+  reflexivity
   done
 
 end Rec03
