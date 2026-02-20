@@ -52,7 +52,15 @@ Use this and more to prove one direction of Task 3, Part a!
 
 -/
 theorem problem_1 : 𝒫(A ∩ B) ⊆ 𝒫(A) := by
-  sorry
+  fix C
+  assume hC
+  set_simplify
+  fix c
+  assume hc
+  have h := hC hc
+  set_simplify
+  eliminate h with hA hB
+  assumption
   done
 
 
@@ -73,7 +81,7 @@ Use the work you did on paper/LaTeX to solve this!
 -/
 
 theorem problem_2 : (A ∩ Bᶜ) ∪ B = A ∪ B := by
-  sorry
+  
   done
 
 end Rec03
