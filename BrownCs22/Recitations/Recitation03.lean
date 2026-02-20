@@ -81,7 +81,7 @@ Use the work you did on paper/LaTeX to solve this!
 -/
 
 theorem problem_2 : (A ∩ Bᶜ) ∪ B = A ∪ B := by
-  
+
   done
 
 end Rec03
