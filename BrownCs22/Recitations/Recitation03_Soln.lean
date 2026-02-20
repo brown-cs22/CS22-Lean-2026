@@ -43,16 +43,35 @@ method.
 
 We saw two important tactics in lecture for set-element proofs in Lean:
 
+* `extensionality`: given a goal `A = B` where `A` and `B` are sets,
+  changes the goal to showing `∀ x, x ∈ A ↔ x ∈ B`.
+  The name "extensionality" refers to the property that two sets are equal
+  if they have the same elements.
+
 * `set_simplify`: unfolds the "logic" of a set membership proposition.
   For instance, `x ∈ A ∩ B` simplifies to `x ∈ A ∧ x ∈ B`.
   `x ∈ A \ C` simplifies to `x ∈ A ∧ ¬(x ∈ C)`.
   Calling `set_simplify` will simplify the goal and all hypotheses.
 
-Use this and more to prove one direction of Task 3, Part a!
+Use these techniques to prove the following.
+Starting with `extensionality` is probably a good move!
+Then think about the last few homeworks; how do you prove an `↔` goal?
 
 -/
+
 theorem problem_1 : 𝒫(A ∩ B) ⊆ 𝒫(A) := by
-  sorry
+--sol   sorry
+  fix X
+  assume hXinter
+  set_simplify
+  fix x
+  assume hxX
+  rewrite subset_def at hXinter
+  have hxAB : x ∈ A ∩ B := hXinter x hxX
+  set_simplify
+  eliminate hxAB with hxA hxB
+  assumption
+  --los
   done
 
 
@@ -73,7 +92,13 @@ Use the work you did on paper/LaTeX to solve this!
 -/
 
 theorem problem_2 : (A ∩ Bᶜ) ∪ B = A ∪ B := by
-  sorry
+--sol   sorry
+  rewrite inter_union_distrib_right
+  rewrite union_comm Bᶜ B
+  rewrite union_compl_self
+  rewrite inter_univ
+  reflexivity
+--los
   done
 
 end Rec03
