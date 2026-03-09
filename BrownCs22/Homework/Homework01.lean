@@ -73,10 +73,21 @@ will be very helpful here!
 
 @[autograded 3]
 theorem problem_1 : (q ∧ p) ∧ (r ∧ q) → (r ∧ p) := by
-  sorry
+  assume h
+  split_goal
+  {
+  eliminate h with h1 h2
+  eliminate h1 with h3 h4
+  eliminate h2 with h5 h6
+  assumption
+  }
+  {
+  eliminate h with h1 h2
+  eliminate h1 with h3 h4
+  eliminate h2 with h5 h6
+  assumption
+  }
   done
-
-
 
 /-
 
@@ -99,7 +110,11 @@ Again, your task is to fill in the `sorry` below to prove this statement.
 
 @[autograded 3]
 theorem problem_2 : (p → q) → ¬ (p ∧ ¬ q) := by
-  sorry
+  assume hp1
+  assume hp2
+  eliminate hp2 with h1 h2
+  have hq : q := hp1 h1
+  contradiction
   done
 
 
@@ -130,5 +145,18 @@ Your task: translate this argument to Lean.
 
 @[autograded 4]
 theorem problem_3 : ((p ∨ q) ∧ (p → r) ∧ (q → s)) → (r ∨ s) := by
-  sorry
+  assume h1
+  eliminate h1 with h2 h3
+  eliminate h3 with h4 h5
+  eliminate h2 with h6 h7
+  {
+    left
+    have hp := h4 h6
+    assumption
+  }
+  {
+    right
+    have hq := h5 h7
+    assumption
+  }
   done
